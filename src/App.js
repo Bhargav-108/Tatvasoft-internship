@@ -1,24 +1,22 @@
-import logo from "./logo.svg";
 import "./App.css";
-
+import Apple from "./components/Apple";
+import Error404 from "./components/Error404";
+import Sheep from "./components/Sheep";
+import Home from "./components/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 function App() {
   return (
     <div className="App">
-      <h1>Bhargav Harsoda</h1>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="Sheep" element={<Sheep />} />
+          <Route path="Apple" element={<Apple />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
