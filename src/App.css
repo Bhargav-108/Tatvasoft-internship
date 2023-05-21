@@ -14,3 +14,7 @@
   display: flex;
   justify-content: space-between;
 }
+.img1{
+  margin-top: 20px;
+  height: 300px;
+}

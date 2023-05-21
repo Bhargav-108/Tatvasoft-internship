@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import Apple from "./components/Apple";
 import Error404 from "./components/Error404";
