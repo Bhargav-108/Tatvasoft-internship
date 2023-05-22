@@ -16,6 +16,9 @@ const Navbar = () => {
         <Link className="link-o" to="/Sheep">
           Sheep
         </Link>
+        <Link className="link-o" to="/Form">
+          Form
+        </Link>
       </div>
     </div>
   );
