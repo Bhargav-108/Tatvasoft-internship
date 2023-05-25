@@ -1,26 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
-import Avatar from "@mui/joy/Avatar";
-import Popover from "@mui/material/Popover";
 import { Formik } from "formik";
 import * as Yup from "yup";
-const Form1 = () => {
-  // const [name, setName] = useState();
-  // const [email, setEmail] = useState();
-  const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const Navigate = useNavigate();
-
-  useEffect(() => {
-    // console.log("The new value of Name : ", name);
-    // return () => {
-    //   console.log("The old value of Name : ", name);
-    // };
-  }, []);
-
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+const SignIn = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Please make sure you have entered you name with atleast 3 char.")
@@ -44,47 +27,10 @@ const Form1 = () => {
     console.log("On the form submitted", values);
     alert("Form Submmited");
   };
-
-  const handleClick = (event) => {
-    console.log(123);
-    setAnchorEl(event.currentTarget);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-    setOpen(false);
-  };
   return (
-    <div>
-      <div
-        style={{
-          paddingTop: 20,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          columnGap: 5,
-        }}
-        //onClick={() => setOpen(true)}
-      >
-        {/*<Avatar color="primary" variant="solid">
-          BH
-        </Avatar>*/}
-      </div>
-      <div style={{ fontSize: "25px", fontWeight: "bolder" }}>
-        Registration Form
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "10px",
-          margin: "10px",
-          paddingTop: "40px",
-        }}
-      >
+    <div className="">
+      <div>SignIn</div>
+      <div>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -228,28 +174,8 @@ const Form1 = () => {
           )}
         </Formik>
       </div>
-      {/*
-      <Popover
-        open={open}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-      >
-        <div>
-          <Button variant="contained" onClick={onHomePageButtonClick}>
-            Logout
-          </Button>
-        </div>
-      </Popover>
-      */}
     </div>
   );
 };
-export default Form1;
+
+export default SignIn;

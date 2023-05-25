@@ -1,25 +1,29 @@
 import React from "react";
 import "./App.css";
-import Apple from "./components/Apple";
-import Error404 from "./components/Error404";
-import Sheep from "./components/Sheep";
-import Home from "./components/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Form1 from "./components/Form1";
+import Navbar from "./Components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Components/Home";
+import AboutUs from "./Components/AboutUs";
+import ContactUs from "./Components/ContactUs";
+import SignIn from "./Components/SignIn";
+import Form from "./Components/Form";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
+    <div className="flex w-screen h-auto bg-[#F5F4E8]  flex-col">
+      <Navbar />
+      <ToastContainer />
+      <main className="w-screen p-8">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="Sheep" element={<Sheep />} />
-          <Route path="Apple" element={<Apple />} />
-          <Route path="Form" element={<Form1 />} />
-          <Route path="*" element={<Error404 />} />
+          <Route path="/About" element={<AboutUs />} />
+          <Route path="/Contact" element={<ContactUs />} />
+          <Route path="/Login" element={<SignIn />} />
+          <Route path="/Form" element={<Form />} />
         </Routes>
-      </BrowserRouter>
+      </main>
     </div>
   );
 }

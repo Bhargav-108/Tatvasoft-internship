@@ -1,25 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
 const Navbar = () => {
   return (
-    <div className="Bar">
-      <div className="links-1">
-        <Link className="link-o" to="/">
-          Home{" "}
-        </Link>
+    <div className="w-screen z-50 flex flex-row justify-between bg-white drop-shadow-sm text-[36352d] p-6 px-16">
+      <Link to="/">
+        <h1 className="basis-2/4 text-xl font-semibold font-mono cursor-pointer">
+          Bookstore
+        </h1>
+      </Link>
 
-        <Link className="link-o" to="/Apple">
-          Apple
-        </Link>
-
-        <Link className="link-o" to="/Sheep">
-          Sheep
-        </Link>
-        <Link className="link-o" to="/Form">
-          Form
-        </Link>
-      </div>
+      <ul className="flex gap-8">
+        <li className="cursor-pointer">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="cursor-pointer">
+          <Link to="/About">About Us</Link>
+        </li>
+        <li className="cursor-pointer">
+          <Link to="/Contact">Contact Us</Link>
+        </li>
+        <li className="cursor-pointer">
+          <Link to="/Login">Login / Sign Up</Link>
+        </li>
+        <li className="cursor-pointer">
+          <Link to="/Form">Form</Link>
+        </li>
+      </ul>
     </div>
   );
 };
