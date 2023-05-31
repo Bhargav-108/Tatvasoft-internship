@@ -1,10 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Context } from "../index.js";
+const baseURL = "https://book-e-sell-node-api.vercel.app";
 const Login = () => {
+  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(Context);
+
   const initialValues = {
     email: "",
   };
@@ -16,17 +21,14 @@ const Login = () => {
     password: Yup.string().required("This field is required"),
   });
   const onFormSubmit = async (values) => {
-    console.log("On the form submitted", { values });
-    const requestData = {
-      userName: values.fname,
-      userEmail: values.email,
-    };
-    const res = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      requestData
-    );
+    console.log("Email:", values.email);
 
-    if (res.status === 201) {
+    const res = await axios.post(baseURL + "/api/user/login", {
+      email: values.email,
+      password: values.password,
+    });
+    if (res.status === 200) {
+      console.log(res.data.result);
       toast.success("Login succesfully", {
         position: "top-center",
         autoClose: 750,
@@ -37,7 +39,15 @@ const Login = () => {
         progress: undefined,
         theme: "colored",
       });
+      setIsAuthenticated(true);
+      setUser({
+        email: res.data.result.email,
+        fname: res.data.result.firstName,
+        lname: res.data.result.lastName,
+      });
     } else {
+      setIsAuthenticated(false);
+      setUser({});
       toast.error("Login failed", {
         position: "top-center",
         autoClose: 750,
@@ -50,9 +60,12 @@ const Login = () => {
       });
     }
   };
+  if (isAuthenticated === true) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <>
-      <div className="flex font-sans flex-col items-center justify-center h-auto pt-[42px] pb[80px]">
+      <div className="flex font-sans flex-col items-center justify-center h-auto pt-[42px] pb-[80px]">
         <div className=" font-normal text-[18px] mb-[32px]">
           <Link to="/">Home</Link> {">"}{" "}
           <span className="text-red-600">
@@ -124,7 +137,7 @@ const Login = () => {
                         <input
                           className="w-full h-[40px] appearance-none border-[1px] border-[#cacaca] rounded-sm focus:outline-none pl-3"
                           type="email"
-                          label="email"
+                          aria-label="email"
                           id="email"
                           name="email"
                           placeholder="Email"
@@ -144,7 +157,7 @@ const Login = () => {
                         <input
                           className="w-full h-[40px] appearance-none border-[1px] border-[#cacaca] rounded-sm focus:outline-none pl-3"
                           type="password"
-                          label="password"
+                          aria-label="password"
                           id="password"
                           name="password"
                           placeholder="Password"

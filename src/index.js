@@ -1,14 +1,35 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
+
+export const Context = createContext();
+
+const AppWrapper = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
+
+  return (
+    <Context.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        user,
+        setUser,
+      }}
+    >
+      <App />
+    </Context.Provider>
+  );
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <AppWrapper />
     </Router>
   </React.StrictMode>
 );

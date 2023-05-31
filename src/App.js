@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-//import Navbar from "./Components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import Form from "./Components/Form";
@@ -10,8 +9,18 @@ import Footer from "./Components/Footer";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Navbar from "./Components/Navbar";
-
+import { useContext, useState } from "react";
+import { Context } from "./index.js";
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { isAuthenticated, setIsAuthenticated, user, setUser } =
+    useContext(Context);
+  const handleClick = () => {
+    console.log("click");
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  };
   return (
     <div className="flex w-screen h-auto bg-[#ffffff]  flex-col">
       <Navbar />

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
+const baseURL = "https://book-e-sell-node-api.vercel.app";
 const Register = () => {
   const [selectedRole, setSelectedRole] = useState("");
   const validationSchema = Yup.object().shape({
@@ -36,16 +37,17 @@ const Register = () => {
   };
   const onFormSubmit = async (values) => {
     console.log("On the form submitted", { ...values, role: selectedRole });
-    const requestData = {
-      userName: values.fname,
-      userEmail: values.email,
-    };
-    const res = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      requestData
-    );
 
-    if (res.status === 201) {
+    const res = await axios.post(baseURL + "/api/user", {
+      email: values.email,
+      firstName: values.fname,
+      lastName: values.lname,
+      password: values.password,
+      roleId: selectedRole === "Seller" ? 2 : 3,
+    });
+
+    if (res.status === 200) {
+      console.log(res.data.result);
       toast.success("Registered succesfully", {
         position: "top-center",
         autoClose: 750,
@@ -56,22 +58,18 @@ const Register = () => {
         progress: undefined,
         theme: "colored",
       });
+    } else {
+      toast.error("registration failed", {
+        position: "top-center",
+        autoClose: 750,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
-
-    axios.delete("https://jsonplaceholder.typicode.com/posts/1").then((res) => {
-      if (res.status === 200) {
-        toast.success("delete succesfull", {
-          position: "top-center",
-          autoClose: 750,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      }
-    });
   };
   return (
     <>

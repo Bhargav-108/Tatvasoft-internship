@@ -1,0 +1,16 @@
+.img1 {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  position: absolute;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  border: 0;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+  box-sizing: border-box;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
